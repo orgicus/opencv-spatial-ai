@@ -9,9 +9,8 @@ scripts:
 
 live demo recording:
 
-[![demo yolov7 video]
-(https://img.youtube.com/vi/XCE7W2mvkGc/maxresdefault.jpg)]
-(https://www.youtube.com/watch?v=XCE7W2mvkGc)
+<video src="https://user-images.githubusercontent.com/189031/208370689-e978f884-a63d-410c-aebe-b98bb558244e.mp4" controls="controls" style="max-width: 730px;">
+</video>
 
 ### Open3D GPU explorations
 
@@ -20,3 +19,7 @@ The scripts in this section are WIP and require an NVIDIA GPU and Open3D built w
 For windows users with Python 3.10 and CUDA 11.7 I've compiled a pip wheel from source accessible [here](https://drive.google.com/file/d/1ZN37I0XuR2cNenAarRNhD1GsgGh89JGr/view?usp=sharing)
 
 - `replay_point_cloud.py`: run via `python replay_point_cliud.py -p recordings\3-184430102131341300` (after unzipping the above in the `recordings` folder) -> currently via 
+
+
+https://user-images.githubusercontent.com/189031/208370689-e978f884-a63d-410c-aebe-b98bb558244e.mp4
+
