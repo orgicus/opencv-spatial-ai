@@ -9,8 +9,9 @@ scripts:
 
 live demo recording:
 
-<video src="https://github.com/orgicus/opencv-spatial-ai/raw/main/2022/assets/yolov7-tiny-escalators.mp4" controls="controls" style="max-width: 730px;">
-</video>
+[![demo yolov7 video]
+(https://img.youtube.com/vi/XCE7W2mvkGc/maxresdefault.jpg)]
+(https://www.youtube.com/watch?v=XCE7W2mvkGc)
 
 ### Open3D GPU explorations
 
