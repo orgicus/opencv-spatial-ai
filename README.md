@@ -7,6 +7,11 @@ scripts:
 - `yolo_escalators_live.py` : runs live camera with `yolov7escalatorstiny_openvino_2021.4_6shave.blob` model
 - `yolo_escalators_replay.py`: WIP attempt using (fails on nn setup), but attempts to load [on site recording](https://drive.google.com/file/d/1OLsdA7FZCgwWtPbNKeAugy_kOHwhKS6f/view?usp=sharing) to be unzipped in the `recordings` folder (1.7GB)
 
+live demo recording:
+
+<video src="https://github.com/orgicus/opencv-spatial-ai/raw/main/2022/assets/yolov7-tiny-escalators.mp4" controls="controls" style="max-width: 730px;">
+</video>
+
 ### Open3D GPU explorations
 
 The scripts in this section are WIP and require an NVIDIA GPU and Open3D built with GPU support.
