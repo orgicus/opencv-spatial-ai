@@ -10,6 +10,7 @@ In summary, the steps to solve this would include:
 - Prototype and test performance of a point cloud solution using traditional computer vision techniques (e.g. DBSCAN clustering)
 - Train and tune a custom YOLOv7 model taking into account changing scales, occlusions, etc.
 
+The system is currently used in a large retailer on famous Regent St. London affect amazing generative graphics based on people detected on escalators.
 
 ### YOLOv7 Tiny Escalator
 
@@ -148,6 +149,16 @@ For windows users with Python 3.10 and CUDA 11.7 I've compiled a pip wheel from 
 - `replay_point_cloud.py`: run via `python replay_point_cliud.py -p recordings\3-184430102131341300` (after unzipping the above in the `recordings` folder) -> currently via CPU which is **slow**. (I wish learned that [Open3D's visualiser doesn't easily render GPU point clouds](https://github.com/isl-org/Open3D/issues/5580#issuecomment-1299369283) sooner :facepalm:)
 - `point_cloud_utils.py`: utilities to crop a CPU point cloud by an oriented bounding box (which can be used to generate an almost orthognal top down view as a binary image (via rendering on CPU)). This can be adapted to the GPU reprojecting the point cloud which is must faster. Additionally this includes a utility function to extract bounding boxes of the cropped point cloud via DB scan clustering (available in the Open3D GPU module as well) 
 - `point_cloud_to_depth_gpu.py`: is a test demonstrating super fast point cloud to depth reprojection. (This test uses random pointcloud, a projected DepthAI->Open3D point cloud can be used). The idea is to avoid using 2 renderers for 2 escalators and simply reproject the same point cloud from 2 points of view simulating an almost orthogonal view. [Latest Open3D updates](https://github.com/isl-org/Open3D/issues/5703) include the ability to crop the point cloud with an oriented bounding box.
+
+Regardless, even with a CPU, the processing speed is >20 fps:
+
+<video src="[https://user-images.githubusercontent.com/189031/208370689-e978f884-a63d-410c-aebe-b98bb558244e.mp4](https://user-images.githubusercontent.com/189031/208376436-7c79fde5-7a21-43a2-ad04-7dbe940e9b57.mp4)" controls="controls" style="max-width: 730px;">
+</video>
+
+
+https://user-images.githubusercontent.com/189031/208376436-7c79fde5-7a21-43a2-ad04-7dbe940e9b57.mp4
+
+
 
 https://user-images.githubusercontent.com/189031/208370689-e978f884-a63d-410c-aebe-b98bb558244e.mp4
 
