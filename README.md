@@ -124,7 +124,7 @@ plt.show()
 
 ```
 
-However I mave botched the annotations somehow :facepalm:
+However I have botched the annotations somehow :facepalm:
 
 ![png](2022/assets/test_batch0_labels.jpg)
 
@@ -135,8 +135,7 @@ The scripts in this section are WIP and require an NVIDIA GPU and Open3D built w
 
 For windows users with Python 3.10 and CUDA 11.7 I've compiled a pip wheel from source accessible [here](https://drive.google.com/file/d/1ZN37I0XuR2cNenAarRNhD1GsgGh89JGr/view?usp=sharing)
 
-- `replay_point_cloud.py`: run via `python replay_point_cliud.py -p recordings\3-184430102131341300` (after unzipping the above in the `recordings` folder) -> currently via 
-
+- `replay_point_cloud.py`: run via `python replay_point_cliud.py -p recordings\3-184430102131341300` (after unzipping the above in the `recordings` folder) -> currently via CPU which is **slow**. (I wish learned that [Open3D's visualiser doesn't easily render GPU point clouds](https://github.com/isl-org/Open3D/issues/5580#issuecomment-1299369283) sooner :facepalm:)
 
 https://user-images.githubusercontent.com/189031/208370689-e978f884-a63d-410c-aebe-b98bb558244e.mp4
 
