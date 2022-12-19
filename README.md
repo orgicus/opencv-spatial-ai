@@ -1,6 +1,16 @@
 # opencv-spatial-ai
 OpenCV Luxonis Spatial AI Contest Submission
 
+### Description  
+
+The KowawahBear project is attempting to address the problem of tracking people on escalators in retail spaces. Computer Vision is seeing a boom of algorithms / models / solutions when it comes to people detection. However, while most options cover front / side facing angles with top / overhead angles, there is very little data to tackle the problem of tracking people on escalators in a retail environment. While the environment offers favorable conditions (such as indoor areas with controlled lighting in most situations) there are also challenges: featureless white walls in vicinity, very restrictive control over the placement and size of camera equipment, the perspective affected by large escalator slopes amplifying occlusions, no control over what people wear (e.g. either highly reflective or highly light absorbent clothing), etc. 
+The proposed solution involves building a system that takes advantage of OAK-D-Pro’s features such as active stereo (addressing featureless areas), being able to cover depth at large distances (~35 meters according to docs) as well as its hardware accelerated neural inference capabilities via Intel Movidius and wealth of models the OpenVINO Model Zoo brings. 
+It is an opportunity to survey SOTA models on the OAK-D-Pro, both image based (e.g. YOLOv7) as well as point cloud segmentation models (e.g. PointNet++,  PointNet Transformer, etc.). As opposed to prototypes, the solution has the chance to be part of a live project as the input of a large (10x10m) generative art installation in a highly visible retail space on famous Regent St (Oxford Circus area) in Central London.
+In summary, the steps to solve this would include:
+- Prototype and test performance of a point cloud solution using traditional computer vision techniques (e.g. DBSCAN clustering)
+- Train and tune a custom YOLOv7 model taking into account changing scales, occlusions, etc.
+
+
 ### YOLOv7 Tiny Escalator
 
 scripts:
