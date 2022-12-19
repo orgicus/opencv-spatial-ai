@@ -7,8 +7,8 @@ import numpy as np
 from depthai_sdk import Replay
 from depthai_sdk.utils import frameNorm, cropToAspectRatio
 
-labelMap = ["background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow",
-            "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
+labelMap = ["person", "background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow",
+            "diningtable", "dog", "horse", "motorbike", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--path', default="data", type=str, help="Path where to store the captured data")
@@ -19,7 +19,7 @@ replay = Replay(args.path)
 
 replay.disableStream('depth') # In case depth was saved (mcap)
 # Resize color frames prior to sending them to the device
-replay.setResizeColor((640, 400))
+replay.setResizeColor((640, 360))
 # Keep aspect ratio when resizing the color frames. This will crop
 # the color frame to the desired aspect ratio (in our case 300x300)
 replay.keepAspectRatio(True)
@@ -49,7 +49,7 @@ with dai.Device(pipeline) as device:
     # Read rgb/mono frames, send them to device and wait for the spatial object detection results
     while replay.sendFrames():
         # rgbFrame = cropToAspectRatio(replay.frames['color'], (300,300))
-        rgbFrame = cv2.resize(replay.frames['color'], (640, 400))
+        rgbFrame = cv2.resize(replay.frames['color'], (640, 360))
         depthFrame = depthQ.get().getFrame()
         depthFrameColor = (depthFrame*disparityMultiplier).astype(np.uint8)
         # depthFrameColor = cv2.normalize(depthFrame, None, 255, 0, cv2.NORM_INF, cv2.CV_8UC1)
