@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+import os
+import traceback
 import argparse
 import cv2
 import depthai as dai
@@ -12,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--path', default="data", type=str, help="Path where to store the captured data")
 args = parser.parse_args()
 
-w, h = 640, 400
+w, h = 640, 360
 
 # Create Replay objects
 replay = Replay(args.path)
@@ -36,7 +38,9 @@ nodes.stereo.disparity.link(depthOut.input)
 
 with dai.Device(pipeline) as device:
     # setup point cloud visualisation
-    calibData = device.readCalibration()
+    # calibData = device.readCalibration()
+    calibJsonFile = os.path.join(args.path, 'calib.json')
+    calibData = dai.CalibrationHandler(calibJsonFile)
     intrinsics = calibData.getCameraIntrinsics(dai.CameraBoardSocket.RGB, dai.Size2f(w, h))
     print("self.intrinsics", intrinsics)
     pcl_converter = PointCloudVisualizer(intrinsics, w, h)
@@ -50,17 +54,17 @@ with dai.Device(pipeline) as device:
     # Read rgb/mono frames, send them to device and wait for the spatial object detection results
     while replay.sendFrames():
         # rgbFrame = cropToAspectRatio(replay.frames['color'], (300,300))
-        rgbFrame = cv2.resize(replay.frames['color'], (640, 400))
+        rgbFrame = cv2.resize(replay.frames['color'], (w, h))
         depthFrame = depthQ.get().getFrame()
         depthFrameColor = (depthFrame*disparityMultiplier).astype(np.uint8)
-        # depthFrameColor = cv2.normalize(depthFrame, None, 255, 0, cv2.NORM_INF, cv2.CV_8UC1)
-        # depthFrameColor = cv2.equalizeHist(depthFrameColor)
+        depthFrameColor = cv2.normalize(depthFrame, None, 255, 0, cv2.NORM_INF, cv2.CV_8UC1)
+        depthFrameColor = cv2.equalizeHist(depthFrameColor)
         depthFrameColor = cv2.applyColorMap(depthFrameColor, cv2.COLORMAP_JET)
-        print(rgbFrame.shape)
+        
         cv2.imshow("rgb", rgbFrame)
         cv2.imshow("depth", depthFrameColor)
 
-        pcl_converter.rgbd_to_projection(depthFrame, rgbFrame, remove_noise=False)
+        pcl_converter.rgbd_to_projection(depthFrame, cv2.cvtColor(rgbFrame, cv2.COLOR_BGR2RGB), downsample=True, remove_noise=True)
         pcl_converter.visualize_pcd()
 
         if cv2.waitKey(1) == ord('q'):
